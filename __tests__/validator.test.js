@@ -114,46 +114,56 @@ describe('validator module', () => {
   });
 
   describe('get validator for', () => {
+    let rules = '';
 
     it('strings', () => {
-      // TODO: pass getValidator the rules
-      expect(validator.getValidator(/* rules */)).toBe(validator.isString);
+      rules = 'string';
+      expect(validator.getValidator(rules)).toBe(validator.isString);
     });
     
-    it.skip('numbers', () => {
-      
+    it('numbers', () => {
+      rules = 'number';
+      expect(validator.getValidator(rules)).toBe(validator.isNumber);
     });
 
-    it.skip('arrays', () => {
-      
+    it('arrays', () => {
+      rules = 'array';
+      expect(validator.getValidator(rules)).toBe(validator.isArray);
     });
 
-    it.skip('objects', () => {
-      
+    it('objects', () => {
+      rules = 'object';
+      expect(validator.getValidator(rules)).toBe(validator.isObject);
     });
 
-    it.skip('booleans', () => {
-      
+    it('booleans', () => {
+      rules = 'boolean';
+      expect(validator.getValidator(rules)).toBe(validator.isBoolean);
     });
 
-    it.skip('functions', () => {
-      
+    it('functions', () => {
+      rules = 'function';
+      expect(validator.getValidator(rules)).toBe(validator.isFunction);
     });
 
-    it.skip('array of strings', () => {
-      
+    it('array of strings', () => {
+      rules = 'array of strings';
+      expect(validator.getValidator(rules)).toBe(validator.isArrayOfStrings);
     });
 
-    it.skip('array of numbers', () => {
-      
+    it('array of numbers', () => {
+      rules = 'array of numbers';
+      expect(validator.getValidator(rules)).toBe(validator.isArrayOfNumbers);
     });
 
-    it.skip('array of objects', () => {
-      
+    it('array of objects', () => {
+      rules = 'array of objects';
+      expect(validator.getValidator(rules)).toBe(validator.isArrayOfObjects);
     });
 
-    it.skip('array of booleans', () => {
-      
+    it('array of booleans', () => {
+      rules = 'array of booleans';
+      expect(validator.getValidator(rules)).toBe(validator.isArrayOfBooleans);
     });
 
   });
