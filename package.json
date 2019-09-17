@@ -5,7 +5,9 @@
   "main": "index.js",
   "scripts": {
     "test": "jest --verbose --coverage",
+    "test-watch": "jest --watchAll --verbose --coverage",
     "lint": "eslint '**/*.js'"
+    
   },
   "author": "",
   "license": "ISC",
