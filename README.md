@@ -1,6 +1,6 @@
-# LAB - 01
+# LAB - 02
 
-## Node Ecosystem
+## Classes, Errors, Type Coercion
 
 ### Author: Jose Ojeda
 
