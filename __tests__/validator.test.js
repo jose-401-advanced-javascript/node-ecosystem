@@ -235,8 +235,8 @@ describe('validator module', () => {
     const date3 = 'banana';
     
     it('should turn input to date', () => {
-      expect(String(validator.dateCaster(date1))).toMatch('Fri Apr 27 1990 00:00:00 GMT-0700');
-      expect(String(validator.dateCaster(date2))).toMatch('Wed Sep 18 2019 00:00:00 GMT-0700');
+      expect(String(validator.dateCaster(date1))).toMatch('Fri Apr 27 1990 00:00:00');
+      expect(String(validator.dateCaster(date2))).toMatch('Wed Sep 18 2019 00:00:00');
     });
 
     it('should throw error because of invalid date', () => {
