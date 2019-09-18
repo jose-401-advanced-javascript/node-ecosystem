@@ -169,7 +169,7 @@ describe('validator module', () => {
 
   });
 
-  describe('caster', () => {
+  describe('string caster', () => {
 
     const str = '20';
     const num = 1;
@@ -183,6 +183,13 @@ describe('validator module', () => {
       expect(validator.stringCaster(date)).toMatch('Pacific Daylight Time');
     });
 
+  });
+
+  describe('number caster', () => {
+
+    const str = '20';
+    const bool = false;
+
     it('should turn non-number to numbers', () => {
       expect(validator.numberCaster(str)).toBe(20);
     });
@@ -193,5 +200,49 @@ describe('validator module', () => {
       }).toThrow();
     });
 
+  });
+
+  describe('bool caster', () => {
+
+    const str1 = 'true';
+    const str2 = 'false';
+    const str3 = 'apple';
+    const num1 = 28;
+    const num2 = 0;
+
+    it('should turn non-bool to bool', () => {
+      expect(validator.boolCaster(num1)).toBe(true);
+      expect(validator.boolCaster(num2)).toBe(false);
+    });
+
+    it('should turn string to bool', () => {
+      expect(validator.boolCaster(str1)).toBe(true);
+      expect(validator.boolCaster(str2)).toBe(false);
+    });
+
+    it('should throw a wrong string', () => {
+      expect(() =>{
+        validator.boolCaster(str3);
+      }).toThrow();
+    });
+
+  });
+
+  describe('date caster', () => {
+
+    const date1 = 'April 27 1990';
+    const date2 = 1568790000000; 
+    const date3 = 'banana';
+    
+    it('should turn input to date', () => {
+      expect(String(validator.dateCaster(date1))).toMatch('Fri Apr 27 1990 00:00:00 GMT-0700 (Pacific Daylight Time)');
+      expect(String(validator.dateCaster(date2))).toBe('Wed Sep 18 2019 00:00:00 GMT-0700 (Pacific Daylight Time)');
+    });
+
+    it('should throw error because of invalid date', () => {
+      expect(() =>{
+        validator.dateCaster(date3);
+      }).toThrow();
+    });
   });
 });
