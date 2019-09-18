@@ -1,5 +1,7 @@
 const Schema = require('../lib/Schema');
 
+console.log(Schema);
+
 describe('Schema', () => {
 
   // add a test schema

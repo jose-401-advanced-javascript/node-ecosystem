@@ -1,12 +1,12 @@
 const validator = require('../lib/validator.js');
 
 describe('validator module', () => {
-  
+
   const str = 'yes';
   const num = 1;
   const arr = ['a'];
   const obj = { x: 'y' };
-  const func = () => {};
+  const func = () => { };
   const bool = false;
 
   describe('performs basic validation of', () => {
@@ -37,11 +37,11 @@ describe('validator module', () => {
       expect(validator.isArray(obj)).toBeFalsy();
       expect(validator.isArray(func)).toBeFalsy();
       expect(validator.isArray(bool)).toBeFalsy();
-      
+
     });
 
     it('objects', () => {
-      
+
       expect(validator.isObject(str)).toBeFalsy();
       expect(validator.isObject(num)).toBeFalsy();
       expect(validator.isObject(arr)).toBeFalsy();
@@ -52,7 +52,7 @@ describe('validator module', () => {
     });
 
     it('booleans', () => {
-      
+
       expect(validator.isBoolean(str)).toBeFalsy();
       expect(validator.isBoolean(num)).toBeFalsy();
       expect(validator.isBoolean(arr)).toBeFalsy();
@@ -70,7 +70,7 @@ describe('validator module', () => {
       expect(validator.isFunction(obj)).toBeFalsy();
       expect(validator.isFunction(func)).toBeTruthy();
       expect(validator.isFunction(bool)).toBeFalsy();
-      
+
     });
   });
 
@@ -85,14 +85,14 @@ describe('validator module', () => {
       expect(validator.isArrayOfStrings(arrayOfStrings)).toBeTruthy();
       expect(validator.isArrayOfStrings(arrayOfNumbers)).toBeFalsy();
       expect(validator.isArrayOfStrings(arrayOfObjects)).toBeFalsy();
-      expect(validator.isArrayOfStrings(arrayOfBooleans)).toBeFalsy();  
+      expect(validator.isArrayOfStrings(arrayOfBooleans)).toBeFalsy();
     });
 
     it('numbers', () => {
       expect(validator.isArrayOfNumbers(arrayOfStrings)).toBeFalsy();
       expect(validator.isArrayOfNumbers(arrayOfNumbers)).toBeTruthy();
       expect(validator.isArrayOfNumbers(arrayOfObjects)).toBeFalsy();
-      expect(validator.isArrayOfNumbers(arrayOfBooleans)).toBeFalsy(); 
+      expect(validator.isArrayOfNumbers(arrayOfBooleans)).toBeFalsy();
 
     });
 
@@ -100,16 +100,16 @@ describe('validator module', () => {
       expect(validator.isArrayOfObjects(arrayOfStrings)).toBeFalsy();
       expect(validator.isArrayOfObjects(arrayOfNumbers)).toBeFalsy();
       expect(validator.isArrayOfObjects(arrayOfObjects)).toBeTruthy();
-      expect(validator.isArrayOfObjects(arrayOfBooleans)).toBeFalsy(); 
-    
+      expect(validator.isArrayOfObjects(arrayOfBooleans)).toBeFalsy();
+
     });
 
     it('booleans', () => {
       expect(validator.isArrayOfBooleans(arrayOfStrings)).toBeFalsy();
       expect(validator.isArrayOfBooleans(arrayOfNumbers)).toBeFalsy();
       expect(validator.isArrayOfBooleans(arrayOfObjects)).toBeFalsy();
-      expect(validator.isArrayOfBooleans(arrayOfBooleans)).toBeTruthy(); 
-    
+      expect(validator.isArrayOfBooleans(arrayOfBooleans)).toBeTruthy();
+
     });
   });
 
@@ -120,7 +120,7 @@ describe('validator module', () => {
       rules = 'string';
       expect(validator.getValidator(rules)).toBe(validator.isString);
     });
-    
+
     it('numbers', () => {
       rules = 'number';
       expect(validator.getValidator(rules)).toBe(validator.isNumber);
@@ -164,6 +164,33 @@ describe('validator module', () => {
     it('array of booleans', () => {
       rules = 'array of booleans';
       expect(validator.getValidator(rules)).toBe(validator.isArrayOfBooleans);
+    });
+
+
+  });
+
+  describe('caster', () => {
+
+    const str = '20';
+    const num = 1;
+    const bool = false;
+    const date = new Date();
+
+    it('should turn non-string to strings', () => {
+      expect(validator.stringCaster(str)).toBe('20');
+      expect(validator.stringCaster(num)).toBe('1');
+      expect(validator.stringCaster(bool)).toBe('false');
+      expect(validator.stringCaster(date)).toMatch('Pacific Daylight Time');
+    });
+
+    it('should turn non-number to numbers', () => {
+      expect(validator.numberCaster(str)).toBe(20);
+    });
+
+    it('should throw a error because of a non-number', () => {
+      expect(() =>{
+        validator.numberCaster(bool);
+      }).toThrow();
     });
 
   });
